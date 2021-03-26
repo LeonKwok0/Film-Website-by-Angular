@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DataService } from '../../services/data.service';
 
 @Component({
   selector: 'app-carousel',
@@ -7,9 +8,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CarouselComponent implements OnInit {
 
-  constructor() { }
-
+  constructor(private data:DataService) { };
+  
+  currentlyPlaying:any = [];
   ngOnInit(): void {
+    this.getData()
+  }
+
+  getData(){
+    let url = '/current_play'
+    this.data.get(url).subscribe(
+      (resp:any)=>{  
+        this.currentlyPlaying = resp;
+      }
+    );
   }
 
 }

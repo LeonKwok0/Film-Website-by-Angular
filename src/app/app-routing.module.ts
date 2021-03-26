@@ -5,8 +5,9 @@ import { HomeComponent } from './components/home/home.component';
 import { MylistComponent } from './components/mylist/mylist.component';
 
 const routes: Routes = [
-  { path: 'home', component: HomeComponent  },
+  { path: '', component: HomeComponent  },
   { path: 'mylist', component: MylistComponent },
+  { path: '**', redirectTo: '' },
 ];
 
 @NgModule({

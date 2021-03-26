@@ -1,0 +1,64 @@
+/* .carousel-item{
+    height: 100px;
+    width: 50px;
+} */
+
+/* .poster{
+    height: 100px;
+    width: 50px;
+    background: white;
+} */
+img{
+    /* width: 90%; */
+    width: 99px;
+}
+
+.subTitle{
+    color: white;
+    font-size: 18px;
+    float:left;
+}
+
+
+/* #small{
+    display: none;
+} */
+
+/* @media screen and (max-width: 991.98px) {
+  #big{
+      display: none;
+  }
+  #small{
+      display: block;
+  }
+  .smallIndicator{
+      display: none;
+  }
+} */
+
+
+/* @media screen and (min-width: 1000px) {
+    #big{
+        display: none;
+    }
+    #small{
+        display: block;
+    }
+  }  */
+
+
+.col{
+    margin-bottom: 2em;
+}
+.col:hover .hiddenCap{
+    opacity: 1;
+}
+
+.col:hover  {
+    transform: scale(1.1);
+}
+.col:hover .carousel-inner {
+    height: 200%;
+    transform: scale(2);
+}
+

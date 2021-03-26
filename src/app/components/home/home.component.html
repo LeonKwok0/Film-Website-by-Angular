@@ -1,2 +1,16 @@
-<app-carousel></app-carousel>
-
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <app-carousel></app-carousel>
+    </div>
+  </div>
+  
+<div class="row">
+  <div class="subTitle" >Popular Movies</div>
+</div>
+  <!-- <div class="row " style="width: 100%;"> -->
+    <app-smcarousel [subHeader]="'Popular Movies'" [url]="'/collect/movie/popular'">
+    </app-smcarousel>
+  <!-- </div> -->
+  <div class="row">
+  </div>

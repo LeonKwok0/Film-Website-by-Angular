@@ -1,0 +1,38 @@
+
+
+<!-- <div class="subTitle" >{{subHeader}}</div> -->
+
+<div style="margin-left: 7%; margin-right: 7%;">
+<div id="carouselExampleIndicators2" class="carousel slide" data-ride="carousel">
+    <ol class="carousel-indicators">
+        <li data-target="#carouselExampleIndicators2" data-slide-to="0" class="active"></li>
+        <li data-target="#carouselExampleIndicators2" data-slide-to="1" *ngIf="!isSmall"></li>
+        <li data-target="#carouselExampleIndicators2" data-slide-to="2" *ngIf="!isSmall"></li>
+        <li data-target="#carouselExampleIndicators2" data-slide-to="3" *ngIf="!isSmall"></li>
+    </ol>
+    <div class="carousel-inner" id="small" *ngIf="isSmall">
+        <div class="carousel-item" *ngFor="let item of smList; let key = index" [ngClass]="{'active':key==0}">
+            <img  [src]="item.poster_path" >
+        </div>
+    </div>
+
+    <div class="carousel-inner" id="big" *ngIf="!isSmall">
+        <div class="carousel-item" *ngFor="let lists of bigList; let key = index" [ngClass]="{'active':key==0}">
+                <div class="row" style="width: 100%;" >
+                    <div class="col-md-2" *ngFor="let item of lists">
+                        <img [src]="item.poster_path" >
+                    </div> 
+                </div>
+        </div>
+    </div>
+    <a class="carousel-control-prev" href="#carouselExampleIndicators2" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#carouselExampleIndicators2" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+    </a>
+
+</div>
+</div>
