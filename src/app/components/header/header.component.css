@@ -4,3 +4,13 @@ input{
     border-bottom:2px solid white;
     color: #546177;
 }
+
+img{
+    width: 8%;
+}
+
+.dropdown-menu{
+    width: 100px;
+    background-color: #050932;
+    color: #546177;
+}

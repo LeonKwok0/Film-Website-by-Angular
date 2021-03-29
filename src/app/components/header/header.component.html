@@ -12,8 +12,16 @@
           <a class="nav-link" routerLink="/mylist">My List</a>
         </li>
       </ul>
+
+      <ng-template #rt let-r="result" let-t="term" id="pan">
+        <a [href]="'/watch/'+r.media_type+'/'+r.id">
+          <img [src]="r.backdrop_path" >
+          <ngb-highlight [result]="r.name" [term]="t"></ngb-highlight>
+        </a>
+      </ng-template>
+
       <form class="form-inline my-2 my-lg-0">
-        <input  type="search" placeholder="Search" aria-label="Search" >
+        <input id="typeahead-template" type="text" class="form-control"  [ngbTypeahead]="search" [resultTemplate]="rt"/>
       </form>
     </div>
   </nav>

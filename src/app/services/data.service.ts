@@ -24,7 +24,7 @@ export class DataService {
   }
 
   get(url:string){
-    url = 'http://localhost:3000' +url
+    url = 'http://localhost:3001' +url
     return this.http.get(url)
     .pipe(
       retry(3),

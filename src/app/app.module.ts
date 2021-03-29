@@ -11,6 +11,9 @@ import { MylistComponent } from './components/mylist/mylist.component';
 import { SmcarouselComponent } from './components/smcarousel/smcarousel.component';
 import { DetailComponent } from './components/detail/detail.component';
 import { DataService } from './services/data.service';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { FormsModule } from '@angular/forms';
+import { YouTubePlayerModule } from '@angular/youtube-player';
 
 
 @NgModule({
@@ -27,6 +30,9 @@ import { DataService } from './services/data.service';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    NgbModule,
+    FormsModule,
+    YouTubePlayerModule,
   ],
   providers: [DataService],
   bootstrap: [AppComponent]

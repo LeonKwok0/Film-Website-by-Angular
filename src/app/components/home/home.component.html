@@ -1,16 +1,45 @@
 <div class="container">
-  <div class="row">
-    <div class="col">
-      <app-carousel></app-carousel>
+    <div class="row">
+      <div class="col">
+        <app-carousel></app-carousel>
+      </div>
     </div>
-  </div>
   
-<div class="row">
-  <div class="subTitle" >Popular Movies</div>
+
+  
+  <div class="subTitle"> Continue Watching </div>
+  <app-smcarousel [idx]="'ContinueWatching'" [url]="'ContinueWatching'">
+  </app-smcarousel>
+
+  <div class="subTitle"> Popular Movies </div>
+  <app-smcarousel [idx]="'PopularMovies'" [url]="'/collect/movie/popular'">
+  </app-smcarousel>
+
+  <div class="subTitle"> Top Rated Movies </div>
+  <app-smcarousel [idx]="'TopRatedMovies'" [url]="'/collect/movie/top_rated'">
+  </app-smcarousel>
+
+  <div class="subTitle"> Trending Movies </div>
+  <app-smcarousel [idx]="'TrendingMovies'" [url]="'/collect/trending/movie/day'">
+  </app-smcarousel>
+  
+
+  <div class="subTitle"> Popular TV Shows </div>
+  <app-smcarousel [idx]="'PopularTVShows'" [url]="'/collect/tv/popular'">
+  </app-smcarousel>
+
+  <div class="subTitle"> Top Rated TV Shows </div>
+  <app-smcarousel [idx]="'TopRatedTVShows'" [url]="'/collect/tv/top_rated'">
+  </app-smcarousel>
+
+  <div class="subTitle"> Trending TV shows</div>
+  <app-smcarousel [idx]="'TrendingTVshows'" [url]="'/collect/trending/tv/day'">
+  </app-smcarousel>
+
+
+
+
+
+
+
 </div>
-  <!-- <div class="row " style="width: 100%;"> -->
-    <app-smcarousel [subHeader]="'Popular Movies'" [url]="'/collect/movie/popular'">
-    </app-smcarousel>
-  <!-- </div> -->
-  <div class="row">
-  </div>
