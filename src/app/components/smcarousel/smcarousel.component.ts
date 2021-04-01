@@ -17,28 +17,12 @@ export class SmcarouselComponent implements OnInit {
   public width = 0
   public isSmall =false
   constructor(private data: DataService) { }
-  fake = [
-    {
-      id: 791373,
-      poster_path: "https://image.tmdb.org/t/p/w500/tnAuB8q5vv7Ax9UAEje5Xi4BXik.jpg",
-      name: "Zack Snyder's Justice League"
-    },
-    {
-      id: 399566,
-      poster_path: "https://image.tmdb.org/t/p/w500/5KYaB1CTAklQHm846mHTFkozgDN.jpg",
-      name: "Godzilla vs. Kong"
-    },
-    {
-      id: 600354,
-      poster_path: "https://image.tmdb.org/t/p/w500/pr3bEQ517uMb5loLvjFQi8uLAsp.jpg",
-      name: "The Father"
-    }]
 
   ngOnInit(): void {
+    this.onResize()
+
     if(this.url=="ContinueWatching"){
-      this.data.set_local('mylist',this.fake)
-      this.url = "/collect/movie/popular"
-      this.smList = this.data.get_local('mylist')
+      this.smList = this.data.get_local('continue')
       let tmp: Array<any> = this.smList
       for (let i = 0; i < 24; i += 6) {
         if (this.smList[i]) {
@@ -46,8 +30,7 @@ export class SmcarouselComponent implements OnInit {
         }
       }
       return
-      
-    }
+      }
 
     this.data.get(this.url).subscribe(
       (resp: any) => {

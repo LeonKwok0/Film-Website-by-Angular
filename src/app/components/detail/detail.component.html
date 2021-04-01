@@ -1,49 +1,75 @@
-<div class="container">
- 
+<div class="container" style="margin-top: 20px;">
+
     <div class="row">
-        <div class="col-lg-8">
-            <youtube-player
-                videoId="Vu4UPet8Nyc"
-                suggestedQuality="highres"
-                [height]="videoHeight"
-                [width]="videoWidth"
-                [startSeconds]="43"
-                [endSeconds]="60">
+        <div class="col-lg" *ngIf="videoKey">
+            <youtube-player [videoId]="videoKey" suggestedQuality="highres" [height]="videoHeight" [width]="videoWidth">
             </youtube-player>
         </div>
-        <div class="col-lg-4">
-            <div>
-                <span class="d_title"> item.name </span>
-            </div>
-            <div>??? </div>
+        <div class="col-lg basic" *ngIf="basic && videoKey">
+            <div class="detailTitle">{{basic.title}}</div>
+            <div class="tagline">{{basic.tagline}}</div>
             <div id="year_rate_time">
-                <span id="year"> item.year  |</span>
-                <span id="rate">&#9733; item.vote_average </span>
-                <span id="time"> |&nbsp item.genres </span>
+                <span> {{basic.release_date | date:"yyyy" }} &nbsp;|&nbsp;</span>
+                <span>&#9733;{{basic.vote_average}} &nbsp;| &nbsp;</span>
+                <span>{{getInt(basic.runtime/60)}}hrs &nbsp; {{basic.runtime%60}}mins</span>
             </div>
-            <div>
-               Genres: sdfsdlfsdlk,dsfsdf
-            </div>
-            <div>Spoken languages: item.spoken_languages</div>
-            <button>Add to Watchlist</button>
-            <div></div>
+            <div><span class="halfTitle">Genres:</span> {{basic.genres}}</div>
+            <div><span class="halfTitle"> Spoken Languages: </span>{{basic.spoken_languages}}</div>
+            <button type="button" class="btn btn-primary addBtn" (click)="addList()">{{hasAdded?'Remove from
+                watchlist':'Add to Watchlist'}}</button>
+            <div id='alertPan'></div>
         </div>
 
-      
     </div>
-    <div >
-        <div >Description</div>
-        <div> sfsdfdsafs cvds sdfasdfsd sdfdsfs </div>
 
-        <div >Share</div>
+    <div class="row desc" *ngIf="basic">
+        <div class="descTitle">Description</div>
+        <div>{{basic.overview}}</div>
+
+    </div>
+    <div class="row desc" *ngIf="basic && videoKey">
         <div class="share">
-            <span>twtter</span>
-            <span>facebook</span>
+            <div class="shareTitle">Share</div>
+            <span id="tw"><a class="twitter-share-button" [href]="'https://twitter.com/intent/tweet?text='+twContent"
+                    target="view_window">
+                    <i class="fab fa-twitter"></i></a></span>
+            &nbsp;
+            <span id="fb">
+                <a target="_blank"
+                    [href]="'https://www.facebook.com/sharer/sharer.php?u='+fbContent+'%2F&amp;src=sdkpreparse'"
+                    class="fb-xfbml-parse-ignore">
+                    <i class="fab fa-facebook-square"></i>
+                </a>
+            </span>
         </div>
-    </div>
-    <div class="row">
         <div></div>
     </div>
 
+    
+    <div class="rev desc" *ngIf="reviews">
+        <div class="row subTitle">Reviews &nbsp;<span style="color: grey;">{{reviews.length}}</span></div>
+        <div class="row revEle" *ngFor="let item of reviews">
+            
+            <div class="ele">
+                <div class="col-lg-2 eleLeft">
+                    <img [src]="item.avatar_path" alt="">
+                </div>
+                <div class="col-lg-10 eleRight">
+                    <div class="eleTitleRate">
+                        <span class="eleTitle">A review created by {{item.author}} </span>
+                        <span class="eleRate" *ngIf="item.rating">&nbsp;&#11089; {{item.rating}} &nbsp;</span>
+                    </div>
 
-</div>
+                    <div class="eleAuthor">
+                        Written by {{item.author}} on {{item.created_at | date:'MMM d, y, h.mm.ss a' }}
+                    </div>
+                    <div class="eleContent">
+                        {{item.content}}
+                    </div>
+                    <div class="readMore" style="text-decoration: underline;"><a [href]="item.url">Read the Rest</a></div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>

@@ -1,29 +1,156 @@
 import { Component, OnInit,HostListener } from '@angular/core';
-
+import {ActivatedRoute} from '@angular/router'
+import {DataService} from '../../services/data.service'
 @Component({
   selector: 'app-detail',
   templateUrl: './detail.component.html',
   styleUrls: ['./detail.component.css']
 })
 export class DetailComponent implements OnInit {
-  public videoWidth = 0;
-  public videoHeight = 0;
-  constructor() { }
+  public videoWidth = 600;
+  public videoHeight = 300;
+  public videoKey:any;
+  public isSmall = false;
+  private mediaType:any;
+  private mediaId:any;
+  public getInt = Math.floor
+  public hasAdded = false
+  public twContent:any
+  public fbContent:any
+
+  public reviews:any
+
+
+  public basic:any
+  constructor( private data:DataService, private router:ActivatedRoute) {
+    // use router.queryParams can get para like ?a=1
+    // router.paramMap to get para in ulr path (defined at router js)
+    router.paramMap.subscribe(params => {
+      this.mediaType = params.get('media_type')
+      this.mediaId = params.get('id')
+    })
+  }
 
   ngOnInit(): void {
+    this.onResize()
+    
     const tag = document.createElement('script');
     tag.src = 'https://www.youtube.com/iframe_api';
     document.body.appendChild(tag);
+
+    this.data.get(`/detail/${this.mediaType}/${this.mediaId}`).subscribe((resp:any)=>{
+        this.basic = resp
+        this.basic.genres = this.basic.genres.map((item:any)=>item['name'])
+        this.basic.spoken_languages = this.basic.spoken_languages.map((item:any)=>item['name'])
+        this.checkStatus()
+        this.contiueWatch()
+        this.twContent = `Watch ${this.basic['title']} ${'https://www.youtube.com/watch?v='+this.videoKey}     %23 USC %23 CSCI571 #FightOn` 
+    })
+
+    this.data.get(`/3/${this.mediaType}/${this.mediaId}/videos`).subscribe((resp:any)=>{
+      if(resp && resp.length >0 ){
+        this.videoKey = resp[0]['key']
+      }else{
+        this.videoKey = 'tzkWB85ULJY'
+      }
+      // it is async so double write this to get all valid data
+      this.fbContent = 'https://www.youtube.com/watch?v='+this.videoKey
+      this.twContent = `Watch ${this.basic['title']} ${'https://www.youtube.com/watch?v='+this.videoKey}     %23 USC %23 CSCI571 #FightOn`
+    })
+
+    this.data.get(`/3/${this.mediaType}/${this.mediaId}/reviews`).subscribe((resp:any)=>{
+      this.reviews = resp.slice(0,10)
+
+    })
+}
+
+  contiueWatch(){
+    let oldData = this.data.get_local('continue')
+    let idxs = oldData.map((item:any)=>item['id'])
+    if (idxs.indexOf(this.basic['id'])==-1){
+      oldData.push({
+        id:this.basic["id"],
+        title:this.basic['title'],
+        poster_path:this.basic['poster_path']
+      })
+      this.data.set_local('continue',oldData)
+    }
   }
+ 
+
 
 
   @HostListener('window:resize', ['$event'])
   onResize() {
     let width = window.innerWidth;
-    let w= width*2/3
-    let h= w*2/3
-    this.videoWidth = w>600?600:w
-    this.videoHeight = h>300?300:h
+    // let w= width*2/3
+    // let h= w*2/3
+    // this.videoWidth = w>600?600:w
+    // this.videoHeight = h>300?300:h
+
+    // another way
+    this.isSmall= width<=920?true:false
+    this.videoWidth = this.isSmall?380:600
+    this.videoHeight = this.isSmall?240:350
+  }
+  
+
+  checkStatus(){
+    let oldData = this.data.get_local('mylist')
+    let idxs = oldData.map((item:any)=>item['id'])
+
+    if (idxs.indexOf(this.basic['id'])!=-1){
+      this.hasAdded = true
+      console.log(this.hasAdded)
+      return true
+    }else{
+      this.hasAdded = false
+      return false
+    }  
   }
 
+  alertPan(type:String,alertContent:String){
+
+    console.log("close")
+
+    let alertHtml = `
+    <div class="alert alert-${type} alert-dismissible fade show" role="alert">
+    ${alertContent}
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close" id="alertBtn">
+      <span aria-hidden="true">&times;</span>
+    </button>
+    </div>`
+    let div = document.getElementById("alertPan")
+    if (div){
+      div.innerHTML = alertHtml
+    }
+    window.setTimeout(function(){
+        document.getElementById('alertBtn')?.click()
+        console.log("closed")
+    },5000);
+  }
+
+  addList(){
+    let oldData = this.data.get_local('mylist')
+    if(this.hasAdded){
+      for(let idx in oldData){
+        if(oldData[idx]['id'] == this.basic["id"]){
+          oldData.splice(idx,1)
+          this.data.set_local('mylist',oldData)
+          this.alertPan('danger',"Removed from watchlist.")
+          this.hasAdded = false
+        }
+      }
+    }else{
+      oldData.push({
+        id:this.basic["id"],
+        title:this.basic['title'],
+        poster_path:this.basic['poster_path']
+      })
+      this.data.set_local('mylist',oldData)
+      this.hasAdded = true
+      this.alertPan('success',"Added to watchlist.")
+    }
+
+  }
 }

@@ -14,13 +14,12 @@ export class DataService {
     if (res){
       return JSON.parse(res)
     }else{
-      return -1
+      return []
     }   
   }
   
   set_local(key:string,value:any){
     localStorage.setItem(key,JSON.stringify(value))
-
   }
 
   get(url:string){
@@ -32,7 +31,6 @@ export class DataService {
   }
 
   getSmallCaro(content:any,type:any,when:any){
-
     return this.http.get(`/api/smallCaro/${content}/${type}${when==null? '':'/'+when}`)
   }
 

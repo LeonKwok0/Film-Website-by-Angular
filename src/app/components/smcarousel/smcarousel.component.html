@@ -17,7 +17,7 @@
         <div class="carousel-item" *ngFor="let lists of bigList; let key = index" [ngClass]="{'active':key==0}">
                 <div class="row" style="text-align:center;" >
                     <div class="col-md-2" *ngFor="let item of lists">
-                        <img [src]="item.poster_path" >
+                        <img [src]="item.poster_path" class="bigPoster">
                     </div> 
                 </div>
         </div>
