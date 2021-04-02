@@ -20,6 +20,10 @@ export class DetailComponent implements OnInit {
 
   public reviews:any
 
+  public casts:any
+  public castInfo:any
+  public castSocial:any
+  public castImg:any
 
   public basic:any
   constructor( private data:DataService, private router:ActivatedRoute) {
@@ -60,8 +64,13 @@ export class DetailComponent implements OnInit {
 
     this.data.get(`/3/${this.mediaType}/${this.mediaId}/reviews`).subscribe((resp:any)=>{
       this.reviews = resp.slice(0,10)
-
     })
+
+    this.data.get(`/3/${this.mediaType}/${this.mediaId}/credits`).subscribe((resp:any)=>{
+        this.casts = resp
+        // console.log(resp)
+    })
+
 }
 
   contiueWatch(){
@@ -152,5 +161,18 @@ export class DetailComponent implements OnInit {
       this.alertPan('success',"Added to watchlist.")
     }
 
+  }
+
+  castDetail(castID:any,profile_path:any){
+
+    this.castImg = profile_path
+    this.data.get(`/person/${castID}`).subscribe((resp:any)=>{
+      this.castInfo = resp
+      // console.log(resp)
+    })
+    this.data.get(`/person/${castID}/external_ids`).subscribe((resp:any)=>{
+      this.castSocial = resp
+      // console.log(resp)
+    })
   }
 }

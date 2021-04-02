@@ -45,11 +45,103 @@
         <div></div>
     </div>
 
-    
+
+    <div class="cast" *ngIf="casts">
+        <div class="row desc subTitle">Full Cast and Crew</div>
+        <div class="d-flex flex-row flex-nowrap overflow-auto">
+            <div class="card" *ngFor="let item of casts" style="min-width: 15rem;" 
+            (click)="castDetail(item.id,item.profile_path)"
+            data-target="#exampleModal" 
+            data-toggle="modal">
+                <img class="card-img-top" [src]="item.profile_path">
+                <div class="card-body" style="text-align: center;">
+                    <div>{{item.name}}<div>
+                            <div>AS</div>
+                            <div class="character">{{item.character}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div  class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+          <div *ngIf="castInfo&&castSocial" style="color: black;" class="modal-content">
+            <div class="modal-header" >
+              
+              <h5 class="modal-title" id="exampleModalLabel">{{ castInfo.name}}</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <div class="row">
+                  <div class="col-md-4">
+                      <img [src]="castImg" width="100%" alt="">
+                  </div>
+                  
+                  <div class="col-md-8">
+                      <p>Birth: {{castInfo.birthday}}</p>
+                      <p>Birth Place: {{castInfo.place_of_birth}} </p>
+                      <p>Gender: {{castInfo.gender == 1? 'Female':null}} 
+                              {{castInfo.gender == 2? 'Male':null}} 
+                              {{castInfo.gender == 0? 'Undefined':null}} </p>
+                      <p>Known for: {{castInfo.known_for_department}} </p>
+                      <p>Also Known as: {{castInfo.also_known_as}} </p>
+                      <br><br>
+                      
+                      
+                      <a target="_blank" *ngIf="castSocial.imdb_id" [href]="'https://www.imdb.com/name/'+castSocial.imdb_id">
+                          <i  ngbTooltip="Visit IMDB"
+                              tooltipClass="tooltip" 
+                              class="fab fa-imdb fa-2x" 
+                              style="color: #e2b62b;"></i>
+                      </a>
+      
+                      <a target="_blank" *ngIf="castSocial.instagram_id" [href]="'https://instagram.com/'+castSocial.instagram_id">
+                          <i  
+                              ngbTooltip="Visit Instagram"
+                              tooltipClass="tooltip" 
+                              class="fab fa-instagram fa-2x" style="color: #8d1b8d;"></i>
+                      </a>
+      
+                      <a target="_blank" *ngIf="castSocial.facebook_id" [href]="'https://facebook.com/'+castSocial.facebook_id">
+                          <i
+                              ngbTooltip="Visit Facebook"
+                              tooltipClass="tooltip"  
+                              class="fab fa-facebook-square fa-2x" style="color: #0000ff;"></i>
+                      </a>
+                      <a target="_blank" *ngIf="castSocial.twitter_id" [href]="'https://twitter.com/'+castSocial.twitter_id">
+                          <i 
+                              ngbTooltip="Visit Twitter"
+                              tooltipClass="tooltip"     
+                              class="fab fa-twitter fa-2x" style="color: #1e90ff;"></i>
+                      </a>
+                   
+                      
+                  </div>
+              </div>
+              <br>
+              <div>
+                  <h3>Biography</h3>
+                  <p>{{castInfo.biography}}</p>
+              </div>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+
+
+
+
+
     <div class="rev desc" *ngIf="reviews">
         <div class="row subTitle">Reviews &nbsp;<span style="color: grey;">{{reviews.length}}</span></div>
         <div class="row revEle" *ngFor="let item of reviews">
-            
+
             <div class="ele">
                 <div class="col-lg-2 eleLeft">
                     <img [src]="item.avatar_path" alt="">
@@ -66,10 +158,14 @@
                     <div class="eleContent">
                         {{item.content}}
                     </div>
-                    <div class="readMore" style="text-decoration: underline;"><a [href]="item.url">Read the Rest</a></div>
+                    <div class="readMore" style="text-decoration: underline;"><a [href]="item.url">Read the Rest</a>
+                    </div>
                 </div>
             </div>
         </div>
-
-
     </div>
+
+
+
+
+</div>
