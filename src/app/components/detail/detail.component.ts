@@ -155,7 +155,8 @@ export class DetailComponent implements OnInit {
       oldData.push({
         id:this.basic["id"],
         title:this.basic['title'],
-        poster_path:this.basic['poster_path']
+        poster_path:this.basic['poster_path'],
+        media_type:this.mediaType
       })
       this.data.set_local('mylist',oldData)
       this.hasAdded = true

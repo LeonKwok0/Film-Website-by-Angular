@@ -2,9 +2,17 @@
     <div class="notFound" *ngIf="mylist.length==0">
         No items found in Watchlist
     </div>
-    <div class="row" *ngFor="let smList of mylist">
+    <div class=" row mytitle" *ngIf="mylist.length!=0">
+        My WatchList
+    </div>
+    <div class="row " *ngFor="let smList of mylist" style="text-align: center;">
         <div class="col-md-2" *ngFor="let item of smList">
-            <img [src]="item.poster_path" class="bigPoster">
+            <a [href]="'/watch/'+item.media_type+'/'+item.id">
+                <img [src]="item.poster_path" class="bigPoster" [ngClass]="{'smposter': isSmall}" >
+            </a>
+            <div class="mediaTitle" [ngClass]="{'smTitle': isSmall}">
+                <span class="titleText" >{{item.title}}</span>
+            </div>
         </div>
     </div> 
 </div>
