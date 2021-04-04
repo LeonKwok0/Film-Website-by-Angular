@@ -2,7 +2,60 @@
     width: 500px;
     height: 400px;
 } */
-#carouselExampleIndicators{
-    margin-top: 40px;
+
+.carousel{
+    margin-top: 20px;
     margin-bottom: 20px;
+}
+/* .carousel-indicators{
+    top:350px;
+    z-index: 1000;
+}  */
+
+
+/* .poster{
+  
+    height: 400px;
+    overflow: hidden;
+} */
+
+.carousel-inner{
+    cursor: pointer;
+}
+
+img{
+    width: 100%;
+}
+.titleText{
+        position: absolute;
+        bottom: 30px;
+        left: 60px;
+        font-size: 16px;
+}
+
+
+.mediaTitle{
+    opacity: 0;
+    height: 150px;
+    width: 100%;
+    position: absolute;
+    bottom: 0px;
+    z-index: 999;
+    color: white;
+    background: linear-gradient(0deg, rgba(1,1,1,1) 50%, rgba(255,255,255,0) 75%); 
+}
+
+
+
+.posterItem:hover{
+    transform: scale(1.1);
+
+}
+.posterItem:hover .mediaTitle{
+    opacity: 1;
+}
+
+
+.smallPic{
+    height: 400px;
 }

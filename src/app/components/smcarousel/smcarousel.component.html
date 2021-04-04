@@ -1,15 +1,17 @@
 
 <div >
 <div [id]="idx" class="carousel slide" data-ride="carousel">
-    <ol class="carousel-indicators" *ngIf="isSmall">
-        <li [attr.data-target]="'#'+idx" data-slide-to="0"></li>
-    </ol>
     <ol class="carousel-indicators" *ngIf="!isSmall">
         <li [attr.data-target]="'#'+idx" *ngFor="let item of bigList;let key=index" [attr.data-slide-to]='key'></li>
     </ol>
     <div class="carousel-inner" *ngIf="isSmall" style="text-align: center;">
-        <div class="carousel-item" *ngFor="let item of smList; let key = index" [ngClass]="{'active':key==0}">
-            <img  [src]="item.poster_path" class="small_poster" >
+        <div class="carousel-item sm-item" *ngFor="let item of smList; let key = index" [ngClass]="{'active':key==0}" >
+            <a [href]="'/watch/'+item.media_type+'/'+item.id">
+            <img  [src]="item.poster_path" class="small_poster">
+            </a>
+            <div class="sm-mediaTitle">
+                <span class="titleText" >{{item.title}}</span>
+            </div>
         </div>
     </div>
 
@@ -17,7 +19,12 @@
         <div class="carousel-item" *ngFor="let lists of bigList; let key = index" [ngClass]="{'active':key==0}">
                 <div class="row" style="text-align:center;" >
                     <div class="col-md-2" *ngFor="let item of lists">
-                        <img [src]="item.poster_path" class="bigPoster">
+                        <a [href]="'/watch/'+item.media_type+'/'+item.id">
+                            <img [src]="item.poster_path" class="bigPoster">
+                        </a>
+                        <div class="mediaTitle">
+                            <span class="titleText" >{{item.title}}</span>
+                        </div>
                     </div> 
                 </div>
         </div>

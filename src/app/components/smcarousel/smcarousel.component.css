@@ -11,7 +11,20 @@
 }
 
 .bigPoster{
-    width: 124px;
+    width: 100%;
+}
+
+.col-md-2{   /* for scale in height*/
+    margin-top: 32px;
+    margin-bottom:32px;
+}
+.col-md-2:hover  {
+    transform: scale(1.2);
+}
+
+
+.col-md-2:hover .mediaTitle{
+    opacity: 1;
 }
 
 .subTitle{
@@ -20,25 +33,13 @@
     float:left;
 }
 
-.col-md-2{
-    margin-bottom: 2em;
-}
-.col-md-2:hover .hiddenCap{
-    opacity: 1;
-}
 
-.col-md-2:hover  {
-    transform: scale(1.1);
-}
-.col-md-2:hover .carousel-inner {
-    height: 200%;
-    transform: scale(2);
-}
+
 
 .next,.prev{  
     position: absolute;
     top: 0;
-    bottom: 0;
+    bottom: 100px;
     z-index: 1;
     display: flex;
     align-items: center;
@@ -54,3 +55,48 @@
 .prev{
     left: -30px;
 }
+
+.mediaTitle{
+    opacity: 0;
+    height: 100px;
+    width: 100%;
+    position: relative;
+    bottom: 100px;
+    z-index: 999;
+    color: white;
+    font-size: 12px;
+    background: linear-gradient(0deg, rgba(1,1,1,1) 50%, rgba(255,255,255,0) 75%); 
+}
+
+.titleText{
+    position: absolute;
+    bottom: 10px;
+    left: 15px;
+}
+
+
+.sm-mediaTitle{
+    height: 100px;
+    width: 55%;
+    position: relative;
+    bottom: 100px;
+    left:23%;
+    z-index: 999;
+    color: white;
+    font-size: 12px;
+    background: linear-gradient(0deg, rgba(1,1,1,1) 50%, rgba(255,255,255,0) 75%); 
+}
+
+
+.sm-item:hover{
+    transform: scale(1.2);
+}
+.sm-item{
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+.carousel-indicators{
+    bottom: 80px;
+
+} 

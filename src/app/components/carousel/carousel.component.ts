@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,HostListener } from '@angular/core';
 import { DataService } from '../../services/data.service';
 
 @Component({
@@ -7,11 +7,13 @@ import { DataService } from '../../services/data.service';
   styleUrls: ['./carousel.component.css']
 })
 export class CarouselComponent implements OnInit {
+  public isSmall:any
 
   constructor(private data:DataService) { };
   
   currentlyPlaying:any = [];
   ngOnInit(): void {
+    this.onResize() 
     this.getData()
   }
 
@@ -22,6 +24,12 @@ export class CarouselComponent implements OnInit {
         this.currentlyPlaying = resp;
       }
     );
+  }
+
+  @HostListener('window:resize', ['$event'])
+  onResize() {
+    let width = window.innerWidth;
+    this.isSmall= width<=920?true:false
   }
 
 }

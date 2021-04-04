@@ -1,1 +1,10 @@
-<p>mylist works!</p>
+<div class="container">
+    <div class="notFound" *ngIf="mylist.length==0">
+        No items found in Watchlist
+    </div>
+    <div class="row" *ngFor="let smList of mylist">
+        <div class="col-md-2" *ngFor="let item of smList">
+            <img [src]="item.poster_path" class="bigPoster">
+        </div>
+    </div> 
+</div>
