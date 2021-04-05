@@ -153,7 +153,7 @@
                     </div>
 
                     <div class="eleAuthor">
-                        Written by {{item.author}} on {{item.created_at | date:'MMM d, y, h.mm.ss a' }}
+                        Written by {{item.author}} on {{item.created_at | date:'MMM d, y, h:mm:ss a' }}
                     </div>
                     <div class="eleContent">
                         {{item.content}}
@@ -164,6 +164,19 @@
             </div>
         </div>
     </div>
+
+    <div class="otherMedia" *ngIf="recommendations" style="padding-top: 60px;">
+        <div class="subTitle">Recommended {{mediaType=='tv'?'TV Shows':'Movies'}} </div>
+        <app-smcarousel [idx]="'recommend'" [url]="'/collect/'+mediaType+'/'+mediaId+'/recommendations'">
+        </app-smcarousel>
+    </div>
+
+    <div class="otherMedia" *ngIf="similar">
+        <div class="subTitle">Similar {{mediaType=='tv'?'TV Shows':'Movies'}} </div>
+        <app-smcarousel [idx]="'similarMeida'" [url]="'/collect/'+mediaType+'/'+mediaId+'/similar'" >
+        </app-smcarousel>
+    </div>
+    
 
 
 

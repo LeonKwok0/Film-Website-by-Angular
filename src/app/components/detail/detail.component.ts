@@ -11,8 +11,8 @@ export class DetailComponent implements OnInit {
   public videoHeight = 300;
   public videoKey:any;
   public isSmall = false;
-  private mediaType:any;
-  private mediaId:any;
+  public mediaType:any;
+  public mediaId:any;
   public getInt = Math.floor
   public hasAdded = false
   public twContent:any
@@ -25,6 +25,9 @@ export class DetailComponent implements OnInit {
   public castSocial:any
   public castImg:any
 
+  public similar:any
+  public recommendations:any
+
   public basic:any
   constructor( private data:DataService, private router:ActivatedRoute) {
     // use router.queryParams can get para like ?a=1
@@ -34,6 +37,7 @@ export class DetailComponent implements OnInit {
       this.mediaId = params.get('id')
     })
   }
+
 
   ngOnInit(): void {
     this.onResize()
@@ -70,6 +74,24 @@ export class DetailComponent implements OnInit {
         this.casts = resp
         // console.log(resp)
     })
+
+    this.data.get(`/3/${this.mediaType}/${this.mediaId}/credits`).subscribe((resp:any)=>{
+      this.casts = resp
+      // console.log(resp)
+  })
+
+  this.data.get(`/collect/${this.mediaType}/${this.mediaId}/similar`).subscribe((resp:any)=>{
+    this.similar = resp
+    console.log("===========")
+    console.log(resp.length)
+  })
+
+  this.data.get(`/collect/${this.mediaType}/${this.mediaId}/recommendations`).subscribe((resp:any)=>{
+    this.recommendations = resp
+    // console.log(resp)
+  })
+
+
 
 }
 
