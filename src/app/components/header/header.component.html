@@ -5,23 +5,23 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
-        <li class="nav-item active">
-          <a class="nav-link" routerLink="">Home <span class="sr-only">(current)</span></a>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="" [ngStyle]="{'color': (!rla.isActive)?'white':null}">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/mylist">My List</a>
+          <a class="nav-link" routerLink="/mylist" routerLinkActive #rla="routerLinkActive" [ngStyle]="{'color': rla.isActive?'white':null}">My List</a>
         </li>
       </ul>
 
-      <ng-template #rt let-r="result" let-t="term" id="pan">
-        <a [href]="'/watch/'+r.media_type+'/'+r.id">
-          <img [src]="r.backdrop_path" >
-          <ngb-highlight [result]="r.name" [term]="t"></ngb-highlight>
+      <ng-template #rt let-r="result" >
+        <a [href]="'/watch/'+r.media_type+'/'+r.id" style="color: white;">
+          <img [src]="r.backdrop_path" class="search" >
+          <ngb-highlight [result]="r.name" ></ngb-highlight>
         </a>
       </ng-template>
 
       <form class="form-inline my-2 my-lg-0">
-        <input id="typeahead-template" type="text" class="form-control"  [ngbTypeahead]="search" [resultTemplate]="rt"/>
+        <input id="typeahead-template" type="text" [ngbTypeahead]="search" [resultTemplate]="rt" placeholder="Search"/>
       </form>
     </div>
   </nav>

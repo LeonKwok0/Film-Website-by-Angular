@@ -11,7 +11,7 @@
             <div id="year_rate_time">
                 <span> {{basic.release_date | date:"yyyy" }} &nbsp;|&nbsp;</span>
                 <span>&#9733;{{basic.vote_average}} &nbsp;| &nbsp;</span>
-                <span>{{getInt(basic.runtime/60)}}hrs &nbsp; {{basic.runtime%60}}mins</span>
+                <span>{{getInt(basic.runtime/60)>0?getInt(basic.runtime/60)+ "hrs":null}} &nbsp; {{basic.runtime%60>0?basic.runtime%60+'mins':null }}</span>
             </div>
             <div><span class="halfTitle">Genres:</span> {{basic.genres}}</div>
             <div><span class="halfTitle"> Spoken Languages: </span>{{basic.spoken_languages}}</div>
@@ -79,7 +79,7 @@
             <div class="modal-body">
               <div class="row">
                   <div class="col-md-4">
-                      <img [src]="castImg" width="100%" alt="">
+                      <img [src]="castImg" width="100%" alt="" style="width: 100%;">
                   </div>
                   
                   <div class="col-md-8">
@@ -144,7 +144,7 @@
 
             <div class="ele">
                 <div class="col-lg-2 eleLeft">
-                    <img [src]="item.avatar_path" alt="">
+                    <img [src]="item.avatar_path" alt="" >
                 </div>
                 <div class="col-lg-10 eleRight">
                     <div class="eleTitleRate">

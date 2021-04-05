@@ -2,15 +2,29 @@ input{
     background-color: #000c21;
     border: 0px;
     border-bottom:2px solid white;
-    color: #546177;
+    color: white;
+    margin-right: 60px;
+    width: 200px;
+}
+.current{
+    color: white;
 }
 
-img{
-    width: 8%;
+
+/* for search result panel */
+.searchImg{
+    width: 68px;
+    margin-right: 5px;
 }
 
+.dropdown-item{
+    padding: 3px 8px;
+    color: white;
+}
 .dropdown-menu{
-    width: 100px;
     background-color: #050932;
-    color: #546177;
+    border: solid 1px white;
+    left: 68px;
+    width: 270px;
+    overflow: hidden;
 }

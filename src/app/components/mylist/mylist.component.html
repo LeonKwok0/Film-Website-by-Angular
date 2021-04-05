@@ -9,10 +9,10 @@
         <div class="col-md-2" *ngFor="let item of smList">
             <a [href]="'/watch/'+item.media_type+'/'+item.id">
                 <img [src]="item.poster_path" class="bigPoster" [ngClass]="{'smposter': isSmall}" >
-            </a>
             <div class="mediaTitle" [ngClass]="{'smTitle': isSmall}">
                 <span class="titleText" >{{item.title}}</span>
             </div>
+            </a>
         </div>
     </div> 
 </div>

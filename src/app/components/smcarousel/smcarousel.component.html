@@ -8,10 +8,10 @@
         <div class="carousel-item sm-item" *ngFor="let item of smList; let key = index" [ngClass]="{'active':key==0}" >
             <a [href]="'/watch/'+item.media_type+'/'+item.id">
             <img  [src]="item.poster_path" class="small_poster">
-            </a>
             <div class="sm-mediaTitle">
                 <span class="titleText" >{{item.title}}</span>
             </div>
+            </a>
         </div>
     </div>
 
@@ -21,10 +21,11 @@
                     <div class="col-md-2" *ngFor="let item of lists">
                         <a [href]="'/watch/'+item.media_type+'/'+item.id">
                             <img [src]="item.poster_path" class="bigPoster">
-                        </a>
+                        
                         <div class="mediaTitle">
                             <span class="titleText" >{{item.title}}</span>
                         </div>
+                        </a>
                     </div> 
                 </div>
         </div>

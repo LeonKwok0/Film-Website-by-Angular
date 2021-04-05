@@ -4,12 +4,12 @@
   </ol>
   <div class="carousel-inner" >
     <div class="carousel-item posterItem" *ngFor="let item of currentlyPlaying;let key=index" [ngClass]="{'active':key==0,'smallPic':!isSmall}">
-     
+      <a [href]="'watch/movie/'+item['id']">
         <img [src]= "item.backdrop_path"  class="d-block w-100" alt="...">
-
-      <div class="mediaTitle" [ngStyle]="{'opacity': isSmall?1:null}">
-        <span class="titleText" >{{item.title}}123123</span>
-      </div>
+        <div class="mediaTitle" [ngStyle]="{'opacity': isSmall?1:null}">
+          <span class="titleText" >{{item.title}}</span>
+        </div>
+      </a>
     </div>
   </div>
   <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
