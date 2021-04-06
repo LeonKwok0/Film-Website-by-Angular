@@ -3,7 +3,8 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable, of, OperatorFunction } from 'rxjs';
 import { catchError, debounceTime, distinctUntilChanged, map, tap, switchMap } from 'rxjs/operators';
 
-const URL = 'http://localhost:3001/search?query=';
+// const URL = 'http://localhost:3001/search?query=';
+const URL = '/search?query=';
 
 
 @Injectable()

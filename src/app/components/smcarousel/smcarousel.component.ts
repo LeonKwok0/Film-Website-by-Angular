@@ -22,7 +22,7 @@ export class SmcarouselComponent implements OnInit {
     this.onResize()
 
     if(this.url=="ContinueWatching"){
-      this.smList = this.data.get_local('continue')
+      this.smList = this.data.get_local('continue').reverse()
       let tmp: Array<any> = this.smList
       for (let i = 0; i < 24; i += 6) {
         if (this.smList[i]) {

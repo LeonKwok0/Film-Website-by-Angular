@@ -19,7 +19,7 @@
 
       <ng-template #rt let-r="result" >
         <a [href]="'/watch/'+r.media_type+'/'+r.id" style="color: white;">
-          <img [src]="r.backdrop_path" class="search" >
+          <img [src]="r.backdrop_path" class="searchImg" >
           <ngb-highlight [result]="r.name" ></ngb-highlight>
         </a>
       </ng-template>

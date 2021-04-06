@@ -1,6 +1,6 @@
 
 <div >
-<div [id]="idx" class="carousel slide" data-ride="carousel">
+<div [id]="idx" class="carousel slide" data-ride="carousel" *ngIf="smList.length>0">
     <ol class="carousel-indicators" *ngIf="!isSmall">
         <li [attr.data-target]="'#'+idx" *ngFor="let item of bigList;let key=index" [attr.data-slide-to]='key'></li>
     </ol>

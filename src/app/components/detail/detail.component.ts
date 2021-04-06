@@ -82,8 +82,6 @@ export class DetailComponent implements OnInit {
 
   this.data.get(`/collect/${this.mediaType}/${this.mediaId}/similar`).subscribe((resp:any)=>{
     this.similar = resp
-    console.log("===========")
-    console.log(resp.length)
   })
 
   this.data.get(`/collect/${this.mediaType}/${this.mediaId}/recommendations`).subscribe((resp:any)=>{
@@ -96,17 +94,25 @@ export class DetailComponent implements OnInit {
 }
 
   contiueWatch(){
-    let oldData = this.data.get_local('continue')
+    let oldData:Array<any> = this.data.get_local('continue')
     let idxs = oldData.map((item:any)=>item['id'])
-    if (idxs.indexOf(this.basic['id'])==-1){
-      oldData.push({
+    // if exist del it finally add it to the tail of array 
+    for (let index = 0; index < oldData.length; index++) {
+      if(oldData[index]["id"] ==  this.basic["id"]){
+        oldData.splice(index,1)
+      }      
+    }
+    // if length > 24 remove top element
+    if (oldData.length==24){
+      oldData.shift()
+    }
+    oldData.push({
         id:this.basic["id"],
         title:this.basic['title'],
         poster_path:this.basic['poster_path'],
         media_type:this.mediaType
-      })
+    })
       this.data.set_local('continue',oldData)
-    }
   }
  
 
@@ -174,6 +180,10 @@ export class DetailComponent implements OnInit {
         }
       }
     }else{
+      if(oldData.length==24){
+        oldData.shift()
+      }
+
       oldData.push({
         id:this.basic["id"],
         title:this.basic['title'],
