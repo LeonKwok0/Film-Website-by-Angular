@@ -76,8 +76,10 @@ app.get('/search', (req, res) => {
                 {
                     id: item.id,
                     name: item.name?item.name:item.title,
-                    backdrop_path: imgURL + "w500" + item.backdrop_path,
-                    media_type: item.media_type
+                    backdrop_path: item.backdrop_path?imgURL + "w500" + item.backdrop_path:"",
+                    media_type: item.media_type,
+                    vote_average:item.vote_average,
+                    date: item.release_date?item.release_date:item.first_air_date
                 }
             )
         }
@@ -94,7 +96,7 @@ app.get('/current_play', (req, res) => {
     let url = `${base}/3/movie/now_playing?api_key=${key}&language=en-US&page=1`
     get(url).then(resp => {
         let resp_filter = []
-        for (let item of resp.data.results.slice(0, 5)) {
+        for (let item of resp.data.results.slice(0, 6)) {
             resp_filter.push(
                 {
                     id: item["id"],
@@ -110,6 +112,8 @@ app.get('/current_play', (req, res) => {
 });
 
 
+
+
 // fetch popular/top rated /trending/recommend/similar X movies/tv shows 
 // url1 /collect/movie|tv/popular|top_rated|trending|recommend|similar
 // url2 /collect/trending/movie|tv/day
@@ -122,9 +126,11 @@ app.get('/collect/:pos1/:pos2/:pos3?', (req, res) => {
             let res_arr = []
             resp_tmdb.data.results.forEach(item => {
                 p_path = item.poster_path ? imgURL + "w500" + item.poster_path : ""
+                b_path = item.backdrop_path ? imgURL + "w780" + item.backdrop_path : ""
                 res_arr.push({
                     id: item.id,
                     poster_path: p_path,
+                    backdrop_path:b_path,
                     title: item.name ? item.name : item.title,
                     media_type:media_type,
                 })
@@ -213,7 +219,7 @@ function dataFilter(url_para, tmdb_data) {
 
  // tv OR movie detail
  app.get('/detail/:pos1/:pos2', (req, res) => {
-    let mov = ['title', 'genres', 'spoken_languages', 'poster_path',"id",
+    let mov = ['title', 'genres', 'spoken_languages', 'poster_path',"backdrop_path","id",
     'release_date', 'runtime', 'overview', 'vote_average', 'tagline'] 
     // tv no 'release_date' runtime  title  || use  first_air_date  episode_run_time  name  //
     let pa = req.params
@@ -228,6 +234,7 @@ function dataFilter(url_para, tmdb_data) {
                 data["runtime"] = data["episode_run_time"]
             }
             data["poster_path"] = data["poster_path"] ? imgURL + "w500" + data["poster_path"] : ""
+            data["backdrop_path"] = data.backdrop_path ? imgURL + "w780" + data.backdrop_path : ""
             mov.forEach(field =>{
                 tmp[field] = data[field]
             })
