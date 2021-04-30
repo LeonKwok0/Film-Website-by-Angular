@@ -1,4 +1,4 @@
-# Frontend
+# A Film Website based on Angular And Bootstrap.
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.2.5.
 
